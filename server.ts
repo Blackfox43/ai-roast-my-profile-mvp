@@ -15,7 +15,7 @@ const RECENT_LIMIT = 6;
 const RATE_LIMIT_WINDOW_MS = Number(process.env.RATE_LIMIT_WINDOW_MS || 60_000);
 const RATE_LIMIT_MAX = Number(process.env.RATE_LIMIT_MAX || 8);
 const ROAST_MODEL = process.env.ROAST_MODEL || "gemini-3.5-flash";
-const DB_FILE = process.env.DB_FILE || path.join(process.cwd(), "roasts.local.json");
+const DB_FILE = process.env.DB_FILE || (process.env.VERCEL ? "/tmp/roasts.local.json" : path.join(process.cwd(), "roasts.local.json"));
 const DATABASE_URL = process.env.DATABASE_URL;
 
 const ALLOWED_STYLES = new Set([
