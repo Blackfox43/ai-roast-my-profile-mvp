@@ -3,9 +3,6 @@ import app from "../server";
 function normalizeApiUrl(req: any) {
   if (typeof req.url !== "string") return;
 
-  // Vercel routes /api/* to this single serverless function. Depending on
-  // the rewrite, Express may see /health, /roast, etc. while the backend
-  // routes are defined as /api/health, /api/roast, etc. Restore the prefix.
   if (!req.url.startsWith("/api")) {
     req.url = `/api${req.url === "/" ? "" : req.url}`;
   }
