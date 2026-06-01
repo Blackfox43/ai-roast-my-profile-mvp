@@ -6,7 +6,9 @@ import { RoastResultView } from "./components/RoastResultView";
 import { RecentRoasts } from "./components/RecentRoasts";
 import { AdBanner } from "./components/AdBanner";
 import { CreateRoastResponse, RoastRecord, RoastStyle } from "./types";
+import { PoliciesPage } from "./pages/PoliciesPage";
 
+type View = "main" | "policies";
 type PolicyView = "privacy" | "terms" | null;
 
 function saveDeleteToken(id: string, token: string) {
@@ -70,19 +72,25 @@ function PolicyModal({ view, onClose }: { view: PolicyView; onClose: () => void 
                 Emails, phone numbers, and links are automatically hidden before storage. You should still avoid pasting private, sensitive, or third-party information.
               </p>
               <p>
-                Public Wall of Shame visibility is opt-in. Share links are accessible to anyone who has the link. A delete key is saved locally in your browser after generation so you can remove your own roast from this device.
+                Public Wall of Shame visibility is opt-in. Share links are accessible to anyone who has the link. A delete key is saved locally in your browser after generation so you can remove your roast anytime.
+              </p>
+              <p className="text-xs text-slate-500">
+                <a href="/policies" className="text-red-400 hover:text-red-300 underline">Read full Privacy Policy →</a>
               </p>
             </>
           ) : (
             <>
               <p>
-                This product is satirical parody. It is meant for entertainment and should not be used for harassment, bullying, employment decisions, mental-health judgments, or serious character assessment.
+                This product is satirical parody. It is meant for entertainment and should not be used for harassment, bullying, employment decisions, mental-health judgments, or serious character attacks.
               </p>
               <p>
                 Users are responsible for the text they submit and must not paste private information, protected-class attacks, threats, sexual content involving minors, or content they do not have permission to share.
               </p>
               <p>
                 Generated results can be imperfect. Treat them as jokes, not facts.
+              </p>
+              <p className="text-xs text-slate-500">
+                <a href="/policies" className="text-red-400 hover:text-red-300 underline">Read full Terms of Service →</a>
               </p>
             </>
           )}
@@ -93,6 +101,7 @@ function PolicyModal({ view, onClose }: { view: PolicyView; onClose: () => void 
 }
 
 export default function App() {
+  const [view, setView] = useState<View>("main");
   const [activeRoast, setActiveRoast] = useState<RoastRecord | null>(null);
   const [recentRoasts, setRecentRoasts] = useState<RoastRecord[]>([]);
   const [loading, setLoading] = useState(false);
@@ -220,6 +229,20 @@ export default function App() {
     );
   }
 
+  if (view === "policies") {
+    return (
+      <>
+        <PoliciesPage />
+        <button
+          onClick={() => setView("main")}
+          className="fixed bottom-6 right-6 text-xs text-slate-400 hover:text-white border border-slate-700 rounded-lg px-4 py-2 bg-slate-900/50 hover:bg-slate-800/50 transition z-40"
+        >
+          ← Back to App
+        </button>
+      </>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-slate-950 text-slate-200 selection:bg-red-500 selection:text-white pb-16 flex flex-col relative overflow-x-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[450px] bg-radial from-red-600/10 via-violet-600/5 to-transparent blur-3xl pointer-events-none" />
@@ -298,6 +321,8 @@ export default function App() {
           </span>
         </div>
         <div className="flex items-center gap-3 text-slate-500">
+          <button onClick={() => setView("policies")} className="hover:text-slate-300 underline">Full Policies</button>
+          <span>•</span>
           <button onClick={() => setPolicyView("privacy")} className="hover:text-slate-300">Privacy</button>
           <button onClick={() => setPolicyView("terms")} className="hover:text-slate-300">Terms</button>
         </div>
