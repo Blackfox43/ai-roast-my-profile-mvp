@@ -166,14 +166,14 @@ function TermsOfService() {
       <div>
         <h3 className="text-lg font-bold text-white mb-3">9. Governing Law</h3>
         <p className="leading-relaxed">
-          These terms are governed by the laws of [Your Jurisdiction]. Any disputes shall be resolved in the courts of [Your Jurisdiction].
+          These terms are governed by the laws of State of California. Any disputes shall be resolved in the courts of State of California.
         </p>
       </div>
 
       <div>
         <h3 className="text-lg font-bold text-white mb-3">10. Contact</h3>
         <p className="leading-relaxed">
-          For questions about these terms or policy violations, contact: [your-email@example.com]
+          For questions about these terms or policy violations, contact: [eirebor1@gmail.com]
         </p>
       </div>
     </div>
